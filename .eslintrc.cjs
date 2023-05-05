@@ -25,7 +25,8 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    'no-debugger': 'off',
+    'no-debugger': process.env === 'development' ? 'off' : 'on',
+    'no-console': process.env === 'development' ? 'off' : 'on',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': [0, { 'packageDir ': './src/' }],
