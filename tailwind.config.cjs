@@ -1,10 +1,11 @@
-const { spacing, height, width, colors } = require("./tailwind/config.cjs");
+const { spacing, height, width, colors } = require("./tailwind/config.js");
 
 module.exports = {
   content: [
     './index.html', 
     './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors,

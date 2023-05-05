@@ -1,6 +1,7 @@
 const config = {
   plugins: [
     // require('postcss'),
+    require('tailwindcss'),
     require('autoprefixer'),
     // require('postcss-px-to-viewport')({
     //   unitToConvert: 'px',    // 需要转换的单位，默认为"px"

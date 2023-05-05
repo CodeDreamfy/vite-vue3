@@ -4,7 +4,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 
 ## Feature
-* 使用了WindiCSS
+* 因为WindiCSS停止维护，转而使用了TailWindCSS
 * 使用了`unplugin-auto-import/vite`
   * `vue` 自动导入 `Vue` 相关函数，如：`ref, reactive, toRef` 等
   * `vue-router`
@@ -16,7 +16,6 @@ This template should help get you started developing with Vue 3 in Vite.
 * 使用了`iconify`，目前导入了`ep`即`elementplus-icons`
 * 使用了ESLint + Airbnb，并自动进行格式修复
 * 支持tailwindcss的类名检查
-* 
 
 > `@intlify/unplugin-vue-i18n/vite`因为在ESLint下报错，暂无法解决，因此取消使用
 ## 使用说明
@@ -31,6 +30,16 @@ This template should help get you started developing with Vue 3 in Vite.
 ```js
 import { storeToRefs } from 'pinia'
 ```
+
+### Sass
+当使用`Sass`的 `Tailwind` 时，使用！重要与@apply需要您使用插值来正确编译
+```css
+.alert {
+  @apply bg-red-500 #{!important};
+}
+```
+
+
 ### 支持svg
 支持自定义的icon图标进行使用，也可以注册成组件
 ```js
