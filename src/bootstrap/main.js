@@ -1,7 +1,7 @@
 import { createPinia } from 'pinia'
 import { createApp as create } from 'vue'
 import createRouter from '@/router'
-import i18nRegister from '@/modules/i18n'
+import i18nRegister from '@/plugins/i18n'
 import application from './app.vue'
 
 export function createApp() {

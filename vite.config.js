@@ -11,6 +11,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import svgLoader from 'vite-svg-loader'
 import eslint from 'vite-plugin-eslint'
+import removeConsole from 'vite-plugin-remove-console'
 
 import Inspect from 'vite-plugin-inspect'
 
@@ -101,6 +102,8 @@ export default defineConfig({
       // use
       // import IconBar from '~icons/my-icons/bar'
     }),
+    // 线上环境删除console
+    removeConsole({ external: ['src/assets/*'] }),
     Inspect()
   ],
   resolve: {

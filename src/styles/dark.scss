@@ -1,0 +1,34 @@
+/* 暗黑模式适配 */
+html.dark {
+  /* 自定义深色背景颜色 */
+  .app-main {
+    background: #020409 !important;
+  }
+  /* element-plus */
+  .el-table__cell {
+    background: var(--el-bg-color);
+  }
+  .el-card {
+    --el-card-bg-color: var(--el-bg-color);
+    // border: none !important;
+  }
+  .el-backtop {
+    --el-backtop-bg-color: var(--el-color-primary-light-9);
+    --el-backtop-hover-bg-color: var(--el-color-primary);
+  }
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    background: transparent;
+  }
+  /* 全局覆盖element-plus的el-dialog、el-drawer、el-message-box、el-notification组件右上角关闭图标的样式，表现更鲜明 */
+  .el-icon {
+    &.el-dialog__close,
+    &.el-drawer__close,
+    &.el-message-box__close,
+    &.el-notification__closeBtn {
+      &:hover {
+        color: rgba(255, 255, 255, 0.85) !important;
+        background-color: rgba(255, 255, 255, 0.12);
+      }
+    }
+  }
+}

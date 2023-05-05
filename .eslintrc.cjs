@@ -5,11 +5,19 @@ const path = require('node:path')
 const createAliasSetting = require('@vue/eslint-config-airbnb/createAliasSetting')
 
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es2021: true,
     node: true,
     'vue/setup-compiler-macros': true
+  },
+  globals: {
+    // script setup
+    defineProps: "readonly",
+    defineEmits: "readonly",
+    defineExpose: "readonly",
+    withDefaults: "readonly"
   },
   extends: [
     'plugin:vue/vue3-essential', // 加上防止错误或意外行为的规则
@@ -25,8 +33,6 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    'no-debugger': process.env === 'development' ? 'off' : 'on',
-    'no-console': process.env === 'development' ? 'off' : 'on',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': [0, { 'packageDir ': './src/' }],
@@ -38,7 +44,14 @@ module.exports = {
         ignoreUrls: true
       }
     ],
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    "no-debugger": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto"
+      }
+    ]
   },
   settings: {
     ...createAliasSetting({
