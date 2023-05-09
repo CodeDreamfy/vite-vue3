@@ -1,11 +1,18 @@
 import Axios from 'axios'
 import { stringify } from 'qs'
+import { ElMessage } from 'element-plus'
+// import showCodeMessage from '@/api/code'
+import { getToken, formatToken } from '@/utils/auth.js'
 import NProgress from '../progress'
+
+const BASE_PREFIX = import.meta.env.VITE_API_BASEURL
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig = {
+  // 前缀
+  baseURL: BASE_PREFIX,
   // 请求超时时间
-  timeout: 10000,
+  timeout: 1000 * 30,
   headers: {
     Accept: 'application/json, text/plain, */*',
     'Content-Type': 'application/json',
@@ -17,42 +24,17 @@ const defaultConfig = {
   }
 }
 
-function getToken() {}
-function formatToken() {}
-
-class PureHttp {
-  constructor() {
+export class PureHttp {
+  constructor(options = {}) {
+    this.axiosInstance = Axios.create(Object.assign(defaultConfig, options))
     this.httpInterceptorsRequest()
     this.httpInterceptorsResponse()
   }
 
-  /** token过期后，暂存待执行的请求 */
-  static requests = []
-
-  /** 防止重复刷新token */
-  static isRefreshing = false
-
-  /** 初始化配置对象 */
-  static initConfig = {}
-
-  /** 保存当前Axios实例对象 */
-  static axiosInstance = Axios.create(defaultConfig)
-
-  /** 重连原始请求 */
-  static retryOriginalRequest(config) {
-    return new Promise((resolve) => {
-      PureHttp.requests.push((token) => {
-        // eslint-disable-next-line no-param-reassign
-        config.headers.Authorization = `Bearer ${token}`
-        resolve(config)
-      })
-    })
-  }
-
-  /** 请求拦截 */
-  static httpInterceptorsRequest() {
-    PureHttp.axiosInstance.interceptors.request.use(
-      async (config) => {
+  /* 请求拦截 */
+  httpInterceptorsRequest() {
+    this.axiosInstance.interceptors.request.use(
+      (config) => {
         // 开启进度条动画
         NProgress.start()
         // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
@@ -60,59 +42,36 @@ class PureHttp {
           config.beforeRequestCallback(config)
           return config
         }
-        if (PureHttp.initConfig.beforeRequestCallback) {
-          PureHttp.initConfig.beforeRequestCallback(config)
-          return config
-        }
         /** 请求白名单，放置一些不需要token的接口（通过设置请求白名单，防止token过期后再请求造成的死循环问题） */
-        const whiteList = ['/refreshToken', '/login']
+        const whiteList = ['/login']
         return whiteList.some((v) => config.url.indexOf(v) > -1)
           ? config
           : new Promise((resolve) => {
-              const data = getToken()
-              if (data) {
-                const now = new Date().getTime()
-                const expired = parseInt(data.expires, 10) - now <= 0
-                if (expired) {
-                  if (!PureHttp.isRefreshing) {
-                    PureHttp.isRefreshing = true
-
-                    PureHttp.isRefreshing = false
-                  }
-                  resolve(PureHttp.retryOriginalRequest(config))
-                } else {
-                  // eslint-disable-next-line no-param-reassign
-                  config.headers.Authorization = formatToken(data.accessToken)
-                  resolve(config)
-                }
-              } else {
-                resolve(config)
-              }
+              // eslint-disable-next-line no-param-reassign
+              config.headers.Authorization = formatToken(getToken())
+              resolve(config)
             })
       },
-      (error) => {
-        return Promise.reject(error)
-      }
+      (error) => Promise.reject(error)
     )
   }
 
-  /** 响应拦截 */
-  static httpInterceptorsResponse() {
-    const instance = PureHttp.axiosInstance
-    instance.interceptors.response.use(
+  /* 响应拦截 */
+  httpInterceptorsResponse() {
+    this.axiosInstance.interceptors.response.use(
       (response) => {
-        const $config = response.config
         // 关闭进度条动画
         NProgress.done()
-        // 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
+        const $config = response.config
+        // 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
         if (typeof $config.beforeResponseCallback === 'function') {
           $config.beforeResponseCallback(response)
           return response.data
         }
-        if (PureHttp.initConfig.beforeResponseCallback) {
-          PureHttp.initConfig.beforeResponseCallback(response)
+        if (response.status === 200) {
           return response.data
         }
+        ElMessage.info(JSON.stringify(response.status))
         return response.data
       },
       (error) => {
@@ -126,35 +85,27 @@ class PureHttp {
     )
   }
 
-  /** 通用请求工具函数 */
-  static request(method, url, param, axiosConfig) {
+  request(method, url, param, axiosConfig) {
     const config = {
       method,
       url,
       ...param,
       ...axiosConfig
     }
-    // 单独处理自定义请求/响应回掉
     return new Promise((resolve, reject) => {
-      PureHttp.axiosInstance
+      this.axiosInstance
         .request(config)
-        .then((response) => {
-          resolve(response)
-        })
-        .catch((error) => {
-          reject(error)
-        })
+        .then((response) => resolve(response))
+        .catch((error) => reject(error))
     })
   }
 
-  /** 单独抽离的post工具函数 */
-  post(url, params, config) {
-    return this.request('post', url, params, config)
+  get(url, data, config = {}) {
+    return this.request('get', url, { params: data }, config)
   }
 
-  /** 单独抽离的get工具函数 */
-  get(url, params, config) {
-    return this.request('get', url, params, config)
+  post(url, data, config = {}) {
+    return this.request('post', url, data, config)
   }
 }
 

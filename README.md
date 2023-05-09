@@ -16,6 +16,9 @@ This template should help get you started developing with Vue 3 in Vite.
 * 使用了`iconify`，目前导入了`ep`即`elementplus-icons`
 * 使用了ESLint + Airbnb，并自动进行格式修复
 * 支持tailwindcss的类名检查
+* 使用了`mitt`进行事件订阅
+* 按需引入了`echart`
+* 使用了[husky](https://typicode.github.io/husky/#/?id=create-a-hook)
 
 > `@intlify/unplugin-vue-i18n/vite`因为在ESLint下报错，暂无法解决，因此取消使用
 ## 使用说明

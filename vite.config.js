@@ -95,7 +95,7 @@ export default defineConfig({
     Icons({
       autoInstall: true,
       customCollections: {
-        'my-icons': FileSystemIconLoader('./assets/icons', (svg) =>
+        'my-svg-icons': FileSystemIconLoader('./assets/svg', (svg) =>
           svg.replace(/^<svg /, '<svg fill="currentColor" ')
         )
       }
@@ -112,6 +112,6 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['vue', 'vue-router', '@vueuse/core']
+    include: ['vue', 'vue-router', '@vueuse/core', '@iconify-icons/ep']
   }
 })
