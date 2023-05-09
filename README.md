@@ -18,7 +18,7 @@ This template should help get you started developing with Vue 3 in Vite.
 * 支持tailwindcss的类名检查
 * 使用了`mitt`进行事件订阅
 * 按需引入了`echart`
-* 使用了[husky](https://typicode.github.io/husky/#/?id=create-a-hook)
+* 使用了[husky](https://typicode.github.io/husky/#/?id=create-a-hook)，可以参看[约定式提交](https://www.conventionalcommits.org/zh-hans/v1.0.0/),[commitlint文档](https://commitlint.js.org/#/./guides-local-setup?id=guides-local-setup)
 
 > `@intlify/unplugin-vue-i18n/vite`因为在ESLint下报错，暂无法解决，因此取消使用
 ## 使用说明
