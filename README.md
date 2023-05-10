@@ -1,4 +1,6 @@
-# Vue3+Vite+iconify+TailWindcss+ElementPlus+VueI18n+Pinia+ESLint(Airbnb) 实践
+# Vue3+Vite 实践
+
+> 包含了iconify、TailWindcss、ElementPlus、VueI18n、Pinia、ESLint(Airbnb)、echarts...
 
 This template should help get you started developing with Vue 3 in Vite.
 

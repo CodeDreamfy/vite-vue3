@@ -5,7 +5,7 @@ import { nextTick, reactive } from 'vue'
 import elementZhCN from 'element-plus/dist/locale/zh-cn.mjs'
 import elementEn from 'element-plus/dist/locale/en.mjs'
 // { eager: true }
-const modules = import.meta.glob('../../locales/*.js?on')
+const modules = import.meta.glob('../../locales/*.json')
 
 export const initialLocale = localStorage.locale ?? 'en'
 
@@ -43,7 +43,7 @@ export async function loadLocaleMessages(i18n, locale) {
     i18n.global.setLocaleMessage(locale, messages.default)
     toggleLibraryI18n(locale)
   } catch (e) {
-    throw new Error(e)
+    throw new Error(e?.stack)
   }
   return nextTick()
 }
