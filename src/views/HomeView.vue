@@ -3,6 +3,8 @@
   import { useI18nStore } from '@/stores/i18n'
   import { storeToRefs } from 'pinia'
   import { SUPPORT_LOCALES } from '@/plugins/i18n'
+  // 自定义图标集使用
+  import IconDynamicAvatar from '~icons/my-svg-icons/dynamic-avatar'
   // 为了从 store 中提取属性时保持其响应性，你需要使用 storeToRefs(), 避免直接解构，和 `props` 一样解构后将失去响应式
   // https://pinia.vuejs.org/zh/core-concepts/
   const i18nStore = useI18nStore()
@@ -26,6 +28,7 @@
       <p>{{ $t('index.name') }}</p>
     </div>
     <i-ep-add-location />
+    <IconDynamicAvatar></IconDynamicAvatar>
     <AppLink
       to="/home/list"
       class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:border-gray-300 hover:text-gray-700 focus:border-gray-300 focus:text-gray-700 focus:outline-none"

@@ -87,7 +87,7 @@ export default function getPluginsList() {
     Icons({
       autoInstall: true,
       customCollections: {
-        'my-svg-icons': FileSystemIconLoader('./assets/svg', (svg) =>
+        'my-svg-icons': FileSystemIconLoader('./src/assets/svg', (svg) =>
           svg.replace(/^<svg /, '<svg fill="currentColor" ')
         )
       }
