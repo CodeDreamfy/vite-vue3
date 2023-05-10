@@ -9,3 +9,17 @@ commitlint.config.js
 postcss.config.cjs
 tailwind.config.cjs
 stylelint.config.js
+
+*.sh
+node_modules
+*.md
+*.woff
+*.ttf
+.vscode
+.idea
+/public
+/docs
+.husky
+.local
+/bin
+Dockerfile

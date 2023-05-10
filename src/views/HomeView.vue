@@ -1,13 +1,13 @@
 <script setup>
-// import { toRefs } from 'vue'
-import { useI18nStore } from '@/stores/i18n'
-import { storeToRefs } from 'pinia'
-import { SUPPORT_LOCALES } from '@/modules/i18n'
-// 为了从 store 中提取属性时保持其响应性，你需要使用 storeToRefs(), 避免直接解构，和 `props` 一样解构后将失去响应式
-// https://pinia.vuejs.org/zh/core-concepts/
-const i18nStore = useI18nStore()
-const { locale } = storeToRefs(i18nStore)
-const { toggleLocale } = i18nStore
+  // import { toRefs } from 'vue'
+  import { useI18nStore } from '@/stores/i18n'
+  import { storeToRefs } from 'pinia'
+  import { SUPPORT_LOCALES } from '@/plugins/i18n'
+  // 为了从 store 中提取属性时保持其响应性，你需要使用 storeToRefs(), 避免直接解构，和 `props` 一样解构后将失去响应式
+  // https://pinia.vuejs.org/zh/core-concepts/
+  const i18nStore = useI18nStore()
+  const { locale } = storeToRefs(i18nStore)
+  const { toggleLocale } = i18nStore
 </script>
 
 <template>
@@ -41,47 +41,47 @@ const { toggleLocale } = i18nStore
 </template>
 
 <style lang="scss" scoped>
-.active {
-  background-color: aqua;
-}
-/* reset */
-select {
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1rem 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  color: inherit;
-}
-/* end of reset */
-
-.locales {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  width: 5rem;
-  border: 1px solid currentColor;
-  border-radius: 2rem;
-  padding: 0.25em 0.5em;
-  font-size: 1.25rem;
-  cursor: pointer;
-  line-height: 1.1;
-
-  &::after {
-    position: absolute;
-    content: '';
-    top: 50%;
-    transform: translateY(-50%);
-    right: 1rem;
-    width: 0.8em;
-    height: 0.5em;
-    background-color: currentColor;
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  .active {
+    background-color: aqua;
   }
-}
+  /* reset */
+  select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1rem 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+  /* end of reset */
+
+  .locales {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 5rem;
+    border: 1px solid currentColor;
+    border-radius: 2rem;
+    padding: 0.25em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+
+    &::after {
+      position: absolute;
+      content: '';
+      top: 50%;
+      transform: translateY(-50%);
+      right: 1rem;
+      width: 0.8em;
+      height: 0.5em;
+      background-color: currentColor;
+      clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    }
+  }
 </style>

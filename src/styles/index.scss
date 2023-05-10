@@ -1,8 +1,7 @@
 /* ./src/styles/index.css */
-
-@import url(./element/index.scss);
+@import './element/index.scss';
 // 深色模式
-@import url(./dark.scss);
+@import './dark.scss';
 
 // :root {
 //   --ep-color-primary: red;

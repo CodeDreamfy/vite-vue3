@@ -1,15 +1,15 @@
 <script setup>
-import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
+  import { computed } from 'vue'
+  import { RouterLink } from 'vue-router'
 
-const props = defineProps({
-  ...RouterLink.props,
-  inactiveClass: String
-})
+  const props = defineProps({
+    ...RouterLink.props,
+    inactiveClass: String
+  })
 
-const isExternalLink = computed(() => {
-  return typeof props.to === 'string' && props.to.startsWith('http')
-})
+  const isExternalLink = computed(() => {
+    return typeof props.to === 'string' && props.to.startsWith('http')
+  })
 </script>
 <template>
   <a v-if="isExternalLink" v-bind="$attrs" :href="to">

@@ -3,16 +3,16 @@
  */
 
 export const Home = {
-  name: "Home",
-  path: "/home"
+  name: 'Home',
+  path: '/home'
 }
 
 export const List = {
-  name: "List",
-  path: "/home/list"
+  name: 'List',
+  path: '/home/list'
 }
 
 export const NotFount = {
-  name: "Not Fount",
-  path: "/404"
+  name: 'Not Fount',
+  path: '/404'
 }

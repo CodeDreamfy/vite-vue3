@@ -1,8 +1,8 @@
 import { createRouter as _createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ListView from '../views/List.vue'
-import  * as alias from './alias'
-  
+import * as alias from './alias'
+
 const routes = [
   {
     path: '/',
@@ -17,10 +17,10 @@ const routes = [
         children: [
           {
             ...alias.List,
-            component:  ListView
+            component: ListView
           }
         ]
-      },
+      }
     ]
   }
 ]
@@ -30,4 +30,4 @@ export const router = _createRouter({
   routes
 })
 
-export default app => app.use(router)
+export default (app) => app.use(router)

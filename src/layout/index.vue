@@ -1,11 +1,11 @@
 <script setup>
-/**
- * @file 页面结构
- */
+  /**
+   * @file 页面结构
+   */
 </script>
 
 <template>
-  <div class="md:mx-auto md:container p-10">
+  <div class="p-10 md:container md:mx-auto">
     <router-view></router-view>
   </div>
 </template>

@@ -1,7 +1,7 @@
 import { createApp as create } from 'vue'
 import createRouter from '@/router'
 import i18nRegister from '@/plugins/i18n'
-import { setupStore } from '@/store'
+import { setupStore } from '@/stores'
 import { useEcharts } from '@/plugins/echarts'
 
 import application from './app.vue'

@@ -1,6 +1,6 @@
 <script setup>
-import { ElConfigProvider } from 'element-plus'
-import { elementUIOptions } from '@/modules/i18n'
+  import { ElConfigProvider } from 'element-plus'
+  import { elementUIOptions } from '@/plugins/i18n'
 </script>
 <template>
   <el-config-provider v-bind="elementUIOptions">
