@@ -22,6 +22,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 > `@intlify/unplugin-vue-i18n/vite`因为在ESLint下报错，暂无法解决，因此取消使用
 ## 使用说明
+
 如果想使用`element-plus`的`icons`直接参考`https://icones.js.org/collection/ep`上面的，如果还需要其他的`icon`，通过`pnpm install`添加`collection`，使用格式为：`{prefix}-{collection}-{icon}`
 
 [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import#install) 作用是为 Vite、Webpack、Rollup 和 esbuild 提供按需自动导入 API
@@ -29,7 +30,9 @@ This template should help get you started developing with Vue 3 in Vite.
 [@vueuse/core](https://github.com/vueuse/vueuse) 提供一些useEffect方法
 
 ### Pinia
+
 为了从 `store` 中提取属性时[保持其响应性](https://pinia.vuejs.org/zh/core-concepts/)，你需要使用 `storeToRefs()`, 避免直接解构，或者使用`toRefs()`进行包裹
+
 ```js
 import { storeToRefs } from 'pinia'
 ```
